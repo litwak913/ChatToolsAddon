@@ -1,0 +1,13 @@
+[package]
+name = "toast-win10"
+version = "0.1.0"
+edition = "2024"
+build = "build.rs"
+[dependencies]
+"tauri-winrt-notification" = "0.7.2"
+"winsafe" = { version = "0.0.23",features = ["advapi"] }
+[build-dependencies]
+"winres" = "0.1.12"
+[package.metadata.winres]
+OriginalFilename = "toast-win10.exe"
+FileDescription = "Chat Tools Toast"
