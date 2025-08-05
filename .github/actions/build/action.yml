@@ -1,0 +1,32 @@
+name: Build
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v4
+    
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.2
+
+    - name: Build toast-win7
+      shell: powershell
+      working-directory: ${{github.workspace}}\win7
+      run: msbuild /m /p:Configuration=Release Win7Notify.sln
+
+    - name: Build toast-win10
+      shell: powershell
+      working-directory: ${{github.workspace}}\win10
+      run: cargo build --verbose --release
+
+    - name: Gather artifacts
+      shell: bash
+      run: |
+        mkdir -p gathered_artifacts
+        mv win7/x64/Release/toast-win7.exe gathered_artifacts/
+        mv win10/target/release/toast-win10.exe gathered_artifacts/
+
+    - name: Summarize
+      shell: bash
+      run: |
+        chmod +x .github/workflows/scripts/summarize.py
+        python3 .github/workflows/scripts/summarize.py gathered_artifacts

@@ -1,0 +1,19 @@
+name: CI
+
+on: [ push, pull_request ]
+
+jobs:
+  build-and-summarize:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Build & Summarize
+      uses: ./.github/actions/build/
+
+    - name: Upload
+      uses: actions/upload-artifact@v4
+      with:
+        name: ChatToolsAddon
+        path: gathered_artifacts/
