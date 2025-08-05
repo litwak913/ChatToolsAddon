@@ -22,16 +22,19 @@ def main():
         sys.exit(1)
 
     entries = sorted(os.listdir(target_dir))
-    with open(summary_path, 'a', encoding='utf-8') as summary:
-        summary.write("## MD5 Checksums`\n\n")
+    with open(summary_path, 'a', encoding='utf-8') as s:
+        s.write("## MD5 Checksums:\n\n")
+        s.write('| File | Size | MD5 |\n')
+        s.write('| --- | --- | --- |\n')
+
         for name in entries:
             full = os.path.join(target_dir, name)
             if os.path.isfile(full):
+                file_size = f'{os.path.getsize(full)} B'
                 checksum = compute_md5(full)
-                md5_file = full + '.md5'
-                with open(md5_file, 'w', encoding='utf-8') as mf:
+                with open(full + '.md5', 'w', encoding='utf-8') as mf:
                     mf.write(f"{checksum}")
-                summary.write(f"- `{name}`: `{checksum}`\n")
+                s.write(f"| {name} | {file_size} | {checksum} |\n")
 
 if __name__ == '__main__':
     main()
