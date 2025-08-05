@@ -1,0 +1,12 @@
+name: Generate MD5 files and summarize
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v4
+
+    - name: Summarize
+      run: |
+        chmod +x .github/workflows/scripts/summarize.py
+        python3 .github/workflows/scripts/summarize.py gathered_artifacts
+      shell: bash
