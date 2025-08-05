@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ ���ɵİ����ļ���
-// �� Win7Notify.rc ʹ��
+// Microsoft Visual C++ 生成的包含文件。
+// 供 Win7Notify.rc 使用
 //
 #define IDI_ICON1                       101
 
