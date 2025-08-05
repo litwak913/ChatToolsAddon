@@ -19,6 +19,7 @@ runs:
       run: cargo build --verbose --release
 
     - name: Gather artifacts
+      shell: bash
       run: |
         mkdir -p gathered_artifacts
         mv win7/x64/Release/toast-win7.exe gathered_artifacts/
