@@ -9,10 +9,12 @@ runs:
       uses: microsoft/setup-msbuild@v1.0.2
 
     - name: Build toast-win7
+      shell: bash
       working-directory: ${{github.workspace}}\win7
       run: msbuild /m /p:Configuration=Release Win7Notify.sln
 
     - name: Build toast-win10
+      shell: bash
       working-directory: ${{github.workspace}}\win10
       run: cargo build --verbose --release
 
