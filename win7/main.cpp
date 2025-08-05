@@ -24,14 +24,14 @@ namespace
     {
         WCHAR buf[MAX_LEN] = {};
         int err = swprintf_s(buf, MAX_LEN, L"Error:%s\nID:%d\nLINE:%d\n", cat, id, __LINE__);
-        if (err == -1) exit(0);
+        if (err == -1) exit(1);
 #ifdef _DEBUG
         MessageBox(nullptr, buf, L"ERR", MB_ICONERROR);
 #else
         OutputDebugString(buf);
 #endif
         puts("SEND_FAILED");
-        exit(0);
+        exit(1);
     }
 
     HWND init_win(HINSTANCE inst)
@@ -124,7 +124,11 @@ int wmain(int argc, wchar_t* argv[], wchar_t* envp[])
     HICON icon = init_icon(inst, iconpath);
     if (title && text)
     {
-        show_notify(hwnd, icon, title, text, 5);
+        if (wcslen(title) <= 64 && wcslen(text) <= 256) show_notify(hwnd, icon, title, text, 5);
+        else {
+            puts("SEND_FAILED");
+            return 1;
+        }
     }
     else
     {
