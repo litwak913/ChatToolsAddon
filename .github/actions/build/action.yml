@@ -24,3 +24,9 @@ runs:
         mkdir -p gathered_artifacts
         mv win7/x64/Release/toast-win7.exe gathered_artifacts/
         mv win10/target/release/toast-win10.exe gathered_artifacts/
+
+    - name: Summarize
+      shell: bash
+      run: |
+        chmod +x .github/workflows/scripts/summarize.py
+        python3 .github/workflows/scripts/summarize.py gathered_artifacts

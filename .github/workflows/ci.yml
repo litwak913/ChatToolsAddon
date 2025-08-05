@@ -9,11 +9,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Build
+    - name: Build & Summarize
       uses: ./.github/actions/build/
-
-    - name: Summarize
-      uses: ./.github/actions/summarize/
 
     - name: Upload
       uses: actions/upload-artifact@v4
